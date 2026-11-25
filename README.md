@@ -8,7 +8,7 @@
 
 A Chrome extension that blocks every account on the public [blockedforaireply.com](https://blockedforaireply.com) list, one at a time, slowly and within X's rate limits.
 
-[![Chrome Web Store: in review](https://img.shields.io/badge/Chrome_Web_Store-in_review-1f8a6f?logo=googlechrome&logoColor=white)](https://replyhygiene.sudolabs.nz/)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/mcoecledhnlpaoijfkkabfefefeolkhj?label=Chrome%20Web%20Store&color=1f8a6f&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/reply-hygiene/mcoecledhnlpaoijfkkabfefefeolkhj)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-1f8a6f)](extension/manifest.json)
 [![MIT license](https://img.shields.io/badge/license-MIT-1f8a6f)](LICENSE)
 [![Sponsor](https://img.shields.io/badge/Sponsor-❤-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/CyrisXD)
@@ -79,7 +79,7 @@ No server, no account, no analytics. Settings and progress stay in your browser.
 
 ## Install
 
-**Chrome Web Store:** in review. The [website](https://replyhygiene.sudolabs.nz/) will link to it as soon as it's live.
+**Chrome Web Store:** [add Reply Hygiene to Chrome](https://chromewebstore.google.com/detail/reply-hygiene/mcoecledhnlpaoijfkkabfefefeolkhj).
 
 **From source:**
 
