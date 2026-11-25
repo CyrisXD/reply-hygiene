@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Reply Hygiene</title>
+<link rel="stylesheet" href="popup.css">
+<body>
+  <header class="top">
+    <svg class="mark" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 4.5h14a2.5 2.5 0 0 1 2.5 2.5v8a2.5 2.5 0 0 1-2.5 2.5h-7.2L7 21v-3.5H5A2.5 2.5 0 0 1 2.5 15V7A2.5 2.5 0 0 1 5 4.5Z" />
+      <path d="m8.5 11 2.4 2.4 4.6-4.8" />
+    </svg>
+    <span class="name">Reply Hygiene</span>
+    <span id="state" class="pill" data-tone="idle">Ready</span>
+  </header>
+
+  <main>
+    <section class="run" aria-live="polite">
+      <h1 id="headline">Ready to start</h1>
+      <p id="detail" class="detail"></p>
+      <div class="progress" id="progressBlock" hidden>
+        <div class="bar" role="progressbar" aria-label="Run progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><span id="fill"></span></div>
+        <p class="meta"><span id="progressText"></span><span id="percent"></span></p>
+      </div>
+      <div class="actions">
+        <button id="start" class="primary" type="button">Start</button>
+        <button id="pause" class="secondary" type="button" hidden>Pause</button>
+      </div>
+    </section>
+
+    <section class="counts" id="countsSection" hidden aria-label="This run">
+      <dl id="counts"></dl>
+    </section>
+
+    <section class="settings">
+      <details id="statusGroup">
+      <summary>Accounts to block <span id="statusSummary" class="meta"></span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 4 4 4-4 4" /></svg></summary>
+      <div class="options" id="statuses">
+        <label class="option"><input type="checkbox" value="confirmed"><span><b>Confirmed</b><small>AI or spam replies checked, evidence saved</small></span></label>
+        <label class="option"><input type="checkbox" value="flagged"><span><b>Flagged</b><small>AI-style writing found by an outside check</small></span></label>
+        <label class="option"><input type="checkbox" value="likely"><span><b>Likely</b><small>Created 2023 or later, blocked without interaction</small></span></label>
+        <label class="option"><input type="checkbox" value="unreviewed"><span><b>Unreviewed</b><small>Older block, not reviewed yet</small></span></label>
+      </div>
+      </details>
+
+      <h2><label for="schedule">Check for new accounts</label></h2>
+      <div class="select">
+        <select id="schedule">
+          <option value="0">Only when I press Start</option>
+          <option value="1">Every day</option>
+          <option value="7">Every week</option>
+        </select>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+      </div>
+      <p id="last" class="meta"></p>
+    </section>
+
+    <details class="log" id="logSection" hidden>
+      <summary>Activity <span id="logCount" class="meta"></span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 4 4 4-4 4" /></svg></summary>
+      <ol id="log"></ol>
+    </details>
+  </main>
+
+  <footer>
+    Uses the <a href="https://blockedforaireply.com" target="_blank" rel="noopener">blockedforaireply.com</a> list · Independent of X and the list’s authors · <a href="https://github.com/sponsors/CyrisXD" target="_blank" rel="noopener">Sponsor</a>
+  </footer>
+  <script src="popup.js"></script>
+</body>
+</html>
