@@ -62,7 +62,9 @@ p { margin: 0; text-wrap: pretty; }
 }
 .button:hover { background: var(--accent-hover); color: var(--accent-ink); }
 .button svg { width: 18px; height: 18px; }
-.cta small { color: var(--muted); font-size: 14px; }
+.button.secondary { background: var(--bg); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); }
+.button.secondary:hover { background: var(--surface); color: var(--text); }
+.cta small { flex-basis: 100%; color: var(--muted); font-size: 14px; }
 .shot { border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); width: 360px; }
 
 /* Sections */
