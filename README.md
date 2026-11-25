@@ -87,6 +87,8 @@ No server, no account, no analytics. Settings and progress stay in your browser.
 2. Click **Load unpacked** and pick the `extension` folder.
 3. Be logged in to x.com, click the extension icon, choose which review levels to block, and press **Start**.
 
+X must be set to English (Settings › Accessibility, display and languages), because Reply Hygiene reads X's English menus. If it isn't, the extension stops and says so.
+
 It opens a pinned x.com tab and works there. Leave that tab alone and use X in other tabs as normal.
 
 ## How it works
@@ -138,6 +140,7 @@ flowchart TD
 ```
 extension/   the Chrome extension (load unpacked, or zip for the store)
 docs/        the website, served by GitHub Pages
+test/        node test/background.test.mjs (no dependencies)
 ```
 
 Package for the Chrome Web Store:

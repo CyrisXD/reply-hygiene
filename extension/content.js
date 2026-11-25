@@ -12,7 +12,7 @@ addEventListener('message', e => {
 const col = () => document.querySelector('[data-testid="primaryColumn"]');
 const q = s => col()?.querySelector(s);
 const btn = (id, kinds) => kinds.map(k => q(`[data-testid="${id}-${k}"]`)).find(Boolean);
-const escape = r => { document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); return r; };
+const closeMenu = r => { document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); return r; };
 
 // Re-checks fn() on every DOM change. Timers are throttled in background tabs, DOM changes are not.
 function waitFor(fn, ms) {
@@ -52,25 +52,35 @@ async function openProfile(id) {
 
 async function block(id) {
   const handle = q('[data-testid="UserName"]')?.innerText.match(/@(\w+)/)?.[1];
-  q('[data-testid="userActions"]').click();
+  const more = q('[data-testid="userActions"]');
+  if (!more) return 'error';
+  more.click();
   const item = await waitFor(() => [...document.querySelectorAll('[role="menuitem"]')].find(m => /^(un)?block @\w+/i.test(m.innerText.trim())), 5000);
-  if (!item) return escape('error');
+  if (!item) return closeMenu('error');
   const [, un, menuHandle] = item.innerText.trim().match(/^(un)?block @(\w+)/i);
-  if (un) return escape('already');
-  if (!handle || menuHandle.toLowerCase() !== handle.toLowerCase()) return escape('mismatch'); // never block anyone else
+  if (un) return closeMenu('already');
+  if (!handle || menuHandle.toLowerCase() !== handle.toLowerCase()) return closeMenu('mismatch'); // never block anyone else
   item.click();
   const confirm = await waitFor(() => document.querySelector('[data-testid="confirmationSheetConfirm"]'), 5000);
-  if (!confirm) return escape('error');
+  if (!confirm) return closeMenu('error');
   const t0 = Date.now();
   confirm.click();
-  const res = () => rl['blocks/create.json']?.at >= t0 ? rl['blocks/create.json'].status : 0;
-  return (await waitFor(() => btn(id, ['unblock']) ? 'blocked' : res() === 429 ? 'ratelimited' : res() === 403 ? 'refused' : null, 10000)) || 'error';
+  return (await waitFor(() => btn(id, ['unblock']) ? 'blocked' : apiResult('blocks/create.json', t0), 10000)) || 'error';
+}
+
+// 'ratelimited' or 'refused' if X answered this request with 429 or 403 after t0.
+function apiResult(ep, t0) {
+  const r = rl[ep]?.at >= t0 ? rl[ep].status : 0;
+  return r === 429 ? 'ratelimited' : r === 403 ? 'refused' : null;
 }
 
 async function unblock(id) {
-  btn(id, ['unblock']).click();
+  const t0 = Date.now();
+  const unblockButton = btn(id, ['unblock']);
+  if (!unblockButton) return 'error';
+  unblockButton.click();
   (await waitFor(() => document.querySelector('[data-testid="confirmationSheetConfirm"]'), 5000))?.click();
-  return (await waitFor(() => btn(id, ['follow', 'unfollow', 'cancel']), 10000)) ? 'unblocked' : 'error';
+  return (await waitFor(() => btn(id, ['follow', 'unfollow', 'cancel']) ? 'unblocked' : apiResult('blocks/destroy.json', t0), 10000)) || 'error';
 }
 
 async function step(id, mode) {
@@ -82,10 +92,11 @@ async function step(id, mode) {
 
 chrome.runtime.onMessage.addListener((msg, _, reply) => {
   if (msg.type === 'ping') {
-    waitFor(() => document.querySelector('[data-testid="AppTabBar_Profile_Link"]'), 15000).then(v => reply({ loggedIn: !!v }));
+    waitFor(() => document.querySelector('[data-testid="AppTabBar_Profile_Link"]'), 15000)
+      .then(v => reply({ loggedIn: !!v, english: /^en\b/i.test(document.documentElement.lang || 'en') }));
     return true;
   }
-  if (msg.type === 'step') {
+  if (msg.type === 'step' && /^\d{1,20}$/.test(msg.id)) {
     step(msg.id, msg.mode).then(result => reply({ result, rl }), () => reply({ result: 'error', rl }));
     return true;
   }
