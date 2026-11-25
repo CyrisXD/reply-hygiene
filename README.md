@@ -91,19 +91,46 @@ It opens a pinned x.com tab and works there. Leave that tab alone and use X in o
 
 ## How it works
 
-<img align="right" width="260" src="docs/assets/popup-running.png" alt="The popup during a run">
+Every account goes through the same loop, one at a time:
 
-| File | Job |
-|---|---|
-| `background.js` | Runs the queue. Downloads `accounts.json` and `removed.json`, saves progress in `chrome.storage.local`, and paces each step. |
-| `content.js` | Opens `x.com/i/user/ID` in the pinned tab and clicks ··· → Block @username → Block. Only blocks if the menu's @username matches the profile that ID opened. |
-| `hook.js` | Runs in the page and reads only the rate-limit headers on X's own API responses, so the extension waits exactly as long as X asks. |
-| `popup.*` | The popup: run state, progress, counts, settings and activity. |
+```mermaid
+flowchart LR
+  list["Download the list"] --> next{"Next account?"}
+  next -- "yes" --> open["Open x.com/i/user/ID<br>in the pinned tab"]
+  open --> match{"@username<br>matches?"}
+  match -- "yes" --> block["··· → Block"]
+  match -- "no" --> skip["Skip and log it"]
+  block --> limit{"X's rate limit<br>left?"}
+  skip --> limit
+  limit -- "yes" --> pace["Wait 3–5 s"] --> next
+  limit -- "no" --> reset["Wait for X's reset"] --> next
+  open -- "X refuses (403)" --> stop(["Stop"])
+  next -- "list done" --> unblock["Unblock accounts removed<br>after an appeal"] --> done(["Done"])
+```
 
-- When a rate limit runs out, it waits until X's reset time. On an error it waits 15 minutes and retries twice. On HTTP 403 from X's security, it stops.
-- Blocked accounts are skipped for good, including any you unblocked yourself since. Suspended or deleted accounts are checked again after 30 days.
+<table>
+<tr>
+<td width="300" valign="top">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/popup-running-dark.png">
+  <img width="300" src="docs/assets/popup-running.png" alt="The popup during a run">
+</picture>
+</td>
+<td valign="top">
 
-<br clear="right">
+**`background.js`** runs the queue. It downloads `accounts.json` and `removed.json`, saves progress in `chrome.storage.local`, and paces each step.
+
+**`content.js`** works the pinned tab. It opens `x.com/i/user/ID`, checks the @username, and clicks ··· → Block @username → Block, the same as you would.
+
+**`hook.js`** runs in the page and reads only the rate-limit headers on X's own API responses, so the extension waits exactly as long as X asks.
+
+**`popup.*`** is what you see: run state, progress, counts, settings and activity.
+
+**Remembering what it's done:** blocked accounts are skipped for good, including any you unblocked yourself since. Suspended or deleted accounts are checked again after 30 days. On an error it waits 15 minutes and retries twice.
+
+</td>
+</tr>
+</table>
 
 ## Repository
 
