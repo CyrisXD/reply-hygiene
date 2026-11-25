@@ -94,18 +94,19 @@ It opens a pinned x.com tab and works there. Leave that tab alone and use X in o
 Every account goes through the same loop, one at a time:
 
 ```mermaid
-flowchart LR
-  list["Download the list"] --> next{"Next account?"}
-  next -- "yes" --> open["Open x.com/i/user/ID<br>in the pinned tab"]
-  open --> match{"@username<br>matches?"}
+flowchart TD
+  list["Download the latest list"] --> open["Open the next account<br>in the pinned x.com tab"]
+  open --> match{"@username matches<br>the list entry?"}
   match -- "yes" --> block["··· → Block"]
-  match -- "no" --> skip["Skip and log it"]
+  match -- "no" --> skip["Skip it"]
   block --> limit{"X's rate limit<br>left?"}
   skip --> limit
-  limit -- "yes" --> pace["Wait 3–5 s"] --> next
-  limit -- "no" --> reset["Wait for X's reset"] --> next
-  open -- "X refuses (403)" --> stop(["Stop"])
-  next -- "list done" --> unblock["Unblock accounts removed<br>after an appeal"] --> done(["Done"])
+  limit -- "yes" --> pace["Wait 3–5 seconds"]
+  limit -- "no" --> reset["Wait until X resets"]
+  pace --> open
+  reset --> open
+  open -. "X refuses" .-> stop(["Stop safely"])
+  open -. "list finished" .-> unblock(["Unblock accounts removed after an appeal"])
 ```
 
 <table>
