@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reply Hygiene: block AI reply accounts on X</title>
+<meta name="description" content="A Chrome extension that blocks the AI and spam reply accounts on the public blockedforaireply.com list, slowly and within X's rate limits.">
+<meta property="og:title" content="Reply Hygiene">
+<meta property="og:description" content="Blocks the AI and spam reply accounts on the public blockedforaireply.com list, slowly and within X's rate limits.">
+<meta property="og:image" content="https://cyrisxd.github.io/reply-hygiene/assets/promo-marquee-1400x560.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/icon32.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="wrap top">
+  <a class="brand" href="./"><img src="assets/icon128.png" alt="">Reply Hygiene</a>
+  <nav>
+    <a class="hide-sm" href="#how">How it works</a>
+    <a class="hide-sm" href="#faq">FAQ</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <h1>Clear AI reply accounts out of X, without babysitting it</h1>
+      <p class="lede">A Chrome extension that blocks every account on the public blockedforaireply.com list, one at a time, while you get on with your day.</p>
+      <div class="cta">
+        <!-- Swap href for the Chrome Web Store listing URL once it's published. -->
+        <a class="button" id="store" href="#faq">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14"/></svg>
+          Coming soon to the Chrome Web Store
+        </a>
+        <small>Free. No account, no tracking.</small>
+      </div>
+    </div>
+    <picture class="shot">
+      <source srcset="assets/popup-running-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="assets/popup-running.png" width="360" height="600" alt="The Reply Hygiene popup during a run: 1,500 of 4,091 accounts done, 1,284 blocked, 211 gone from X.">
+    </picture>
+  </div>
+
+  <section id="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <p class="intro">It does what you would do by hand, just patiently, in a tab you never have to look at.</p>
+      <ol class="steps">
+        <li><h3>Gets the latest list</h3><p>Downloads the public list from blockedforaireply.com. You choose which review levels to block: Confirmed, Flagged, Likely or Unreviewed.</p></li>
+        <li><h3>Blocks in a pinned tab</h3><p>Opens each account in a pinned x.com tab, checks the username matches the list, and picks Block from X’s own menu. Keep using X in your other tabs.</p></li>
+        <li><h3>Keeps up by itself</h3><p>Progress is saved, so it carries on after a restart. Set it to check every day or week, and it only visits accounts it hasn’t handled yet.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>Careful with your account</h2>
+        <div class="points">
+          <div>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div><h3>Slow on purpose</h3><p>One account every 3 to 5 seconds, never faster.</p></div>
+          </div>
+          <div>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h4l2-5 4 10 2-5h4"/></svg>
+            <div><h3>Follows X’s rate limits</h3><p>Reads the limits X sends back and waits until X says it can carry on.</p></div>
+          </div>
+          <div>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6l-8-3Z"/><path d="M9 12h6"/></svg>
+            <div><h3>Stops when X says no</h3><p>If X’s security refuses a request, it stops instead of retrying.</p></div>
+          </div>
+          <div>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>
+            <div><h3>Only blocks</h3><p>It never follows, likes, replies, reports or sends messages, and only touches the exact account a list entry points to.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        <h2>Fair to people who appeal</h2>
+        <p>The list has an appeal process. When an account is taken off it, Reply Hygiene unblocks that account on its next run, but only if Reply Hygiene was the one that blocked it.</p>
+        <p>Blocks you made yourself are never undone, and if you unblock someone it blocked, it won’t block them again.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>See it work</h2>
+      <div class="gallery" tabindex="0" aria-label="Screenshots">
+        <img src="assets/screenshot-1.png" width="1280" height="800" loading="lazy" alt="Blocking accounts while you use X">
+        <img src="assets/screenshot-2.png" width="1280" height="800" loading="lazy" alt="Waiting for X's rate limit to reset">
+        <img src="assets/screenshot-3.png" width="1280" height="800" loading="lazy" alt="A finished run with a daily schedule">
+        <img src="assets/screenshot-4.png" width="1280" height="800" loading="lazy" alt="Choosing which review levels to block">
+        <img src="assets/screenshot-5.png" width="1280" height="800" loading="lazy" alt="Unblocking accounts removed from the list after an appeal">
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Questions</h2>
+      <div class="faq">
+        <details><summary>Is it on the Chrome Web Store yet?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p>It’s in review. This page will link to the listing as soon as it’s live.</p></details>
+        <details><summary>Is this made by X or by blockedforaireply.com?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p>No. Reply Hygiene is independent. It uses the public list from blockedforaireply.com and credits it, but isn’t affiliated with X Corp. or the list’s authors.</p></details>
+        <details><summary>Who decides which accounts are on the list?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p>The people behind <a href="https://blockedforaireply.com">blockedforaireply.com</a>. They review accounts, publish the evidence and handle appeals. Reply Hygiene follows their list and their removals.</p></details>
+        <details><summary>Does it collect my data?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p>No. Settings and progress stay in your browser. There’s no server, no account and no analytics. It only talks to x.com and to blockedforaireply.com to download the list. Read the <a href="privacy.html">privacy policy</a>.</p></details>
+        <details><summary>Can it get my X account in trouble?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p>X can treat fast automated browsing as unusual activity and may temporarily refuse requests. Reply Hygiene goes slowly, follows X’s rate limits and stops if X refuses a request. If it stops, use X normally for an hour before trying again. You use it at your own risk.</p></details>
+        <details><summary>How long does a full run take?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p>A few hours for the full list, plus any time spent waiting for X’s rate limits. After that, scheduled runs only visit new accounts, so they’re much quicker.</p></details>
+        <details><summary>How do I undo blocks?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <p>Unblock anyone from X’s settings under Privacy and safety, then Mute and block, then Blocked accounts. Reply Hygiene won’t block them again. Removing the extension doesn’t undo existing blocks.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Reply Hygiene is independent of X and of blockedforaireply.com.</span>
+    <nav><a href="privacy.html">Privacy</a><a href="https://github.com/CyrisXD/reply-hygiene/issues">Support</a></nav>
+  </div>
+</footer>
+</body>
+</html>

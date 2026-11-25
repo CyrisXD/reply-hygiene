@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy · Reply Hygiene</title>
+<meta name="description" content="Reply Hygiene keeps everything in your browser. No server, no account, no analytics.">
+<link rel="icon" href="assets/icon32.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="wrap top">
+  <a class="brand" href="./"><img src="assets/icon128.png" alt="">Reply Hygiene</a>
+  <nav><a href="./#how">How it works</a></nav>
+</header>
+
+<main class="wrap doc">
+  <h1>Privacy policy</h1>
+  <p class="updated">Last updated 25 November 2026</p>
+
+  <p style="margin-top:24px">Reply Hygiene is a Chrome extension that blocks, on your own X account, the accounts listed on the public list at blockedforaireply.com. <strong>It has no server, no account system, no analytics and no tracking, and it never sends your data to the developer or anyone else.</strong></p>
+
+  <h2>What it reads</h2>
+  <ul>
+    <li><strong>The public list.</strong> It downloads <code>accounts.json</code> and <code>removed.json</code> from blockedforaireply.com. These are public files, and no information about you is sent with the request.</li>
+    <li><strong>x.com pages in its pinned tab.</strong> To block an account, it opens that account’s profile on x.com, checks the username on the page, and uses X’s Block menu. This is website content, read only inside your browser.</li>
+    <li><strong>X’s rate-limit headers.</strong> It reads the rate-limit information on X’s responses so it can wait whenever X asks it to. It doesn’t read or keep the content of those responses.</li>
+    <li><strong>Whether you’re logged in to X.</strong> It checks the x.com page for X’s signed-in navigation so it can tell you to log in. It never reads, stores or sends your password, cookies or tokens.</li>
+  </ul>
+
+  <h2>What it stores</h2>
+  <p>Everything is stored only in your browser, in Chrome’s local extension storage:</p>
+  <ul>
+    <li>your settings: which review levels to block, and how often to check the list</li>
+    <li>the progress of the current run and a short activity log</li>
+    <li>the list IDs it has handled, with the result for each (blocked, already blocked, or gone from X)</li>
+  </ul>
+  <p>Removing the extension deletes all of it.</p>
+
+  <h2>What it shares</h2>
+  <p>Nothing. The only network requests it makes go to x.com (the same requests X’s own site makes when you block someone) and to blockedforaireply.com (to download the public list). No data is sold, transferred, or used for anything other than blocking and unblocking accounts from the list.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the new version will be posted on this page with a new date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy: <a href="https://github.com/CyrisXD/reply-hygiene/issues">open an issue on GitHub</a>.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Reply Hygiene is independent of X and of blockedforaireply.com.</span>
+    <nav><a href="./">Home</a><a href="https://github.com/CyrisXD/reply-hygiene/issues">Support</a></nav>
+  </div>
+</footer>
+</body>
+</html>
