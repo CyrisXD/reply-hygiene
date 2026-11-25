@@ -8,12 +8,12 @@
 
 A Chrome extension that blocks every account on the public [blockedforaireply.com](https://blockedforaireply.com) list, one at a time, slowly and within X's rate limits.
 
-[![Chrome Web Store: in review](https://img.shields.io/badge/Chrome_Web_Store-in_review-1f8a6f?logo=googlechrome&logoColor=white)](https://cyrisxd.github.io/reply-hygiene/)
+[![Chrome Web Store: in review](https://img.shields.io/badge/Chrome_Web_Store-in_review-1f8a6f?logo=googlechrome&logoColor=white)](https://replyhygiene.sudolabs.nz/)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-1f8a6f)](extension/manifest.json)
 [![MIT license](https://img.shields.io/badge/license-MIT-1f8a6f)](LICENSE)
 [![Sponsor](https://img.shields.io/badge/Sponsor-❤-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/CyrisXD)
 
-[Website](https://cyrisxd.github.io/reply-hygiene/) · [Privacy](https://cyrisxd.github.io/reply-hygiene/privacy.html) · [Report a bug](https://github.com/CyrisXD/reply-hygiene/issues)
+[Website](https://replyhygiene.sudolabs.nz/) · [Privacy](https://replyhygiene.sudolabs.nz/privacy.html) · [Report a bug](https://github.com/CyrisXD/reply-hygiene/issues)
 
 <br>
 
@@ -79,7 +79,7 @@ No server, no account, no analytics. Settings and progress stay in your browser.
 
 ## Install
 
-**Chrome Web Store:** in review. The [website](https://cyrisxd.github.io/reply-hygiene/) will link to it as soon as it's live.
+**Chrome Web Store:** in review. The [website](https://replyhygiene.sudolabs.nz/) will link to it as soon as it's live.
 
 **From source:**
 
